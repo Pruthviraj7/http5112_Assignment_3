@@ -1,0 +1,118 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - School Portal</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            border-bottom: 2px solid #333;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .sections {
+            display: flex;
+            justify-content: space-around;
+            width: 70%;
+            margin: 20px;
+        }
+
+        .section {
+            background-color: #fff;
+            padding: 190px; /* Increased the size */
+            border-radius: 20px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            flex: 1;
+            margin: 0 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .section:hover {
+                background-color: #f0f0f0;
+            }
+
+        .teacher-section {
+            background-color: #FFE082;
+            text-decoration: none;
+        }
+
+            .teacher-section:hover {
+                background-color: #ffd54f; /* Change the color on hover */
+                text-decoration:none;
+            }
+
+        .student-section {
+            background-color: #81D4FA;
+            text-decoration: none;
+        }
+
+            .student-section:hover {
+                background-color: #63a4f7; /* Change the color on hover */
+                text-decoration: none; /* Remove underline on hover */
+            }
+
+        .class-section {
+            background-color: #A5D6A7;
+            text-decoration: none;
+        }
+
+            .class-section:hover {
+                background-color: #81c784; /* Change the color on hover */
+                text-decoration: none;
+            }
+
+        .section h2 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .section span {
+            text-decoration: none;
+            color: inherit;
+            font-size: 18px;
+            font-weight: bold;
+            text-decoration: none; /* Remove underline */
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/Teacher/List">Teachers</a>
+        <a href="/Student/List">Students</a>
+        <a href="/Class/List">Classes</a>
+    </nav>
+
+    <div class="container">
+        <div class="sections">
+            @RenderBody()
+        </div>
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,35 @@
+﻿/* Add this style for Index.cshtml */
+main {
+    padding: 20px;
+}
+
+.btn-md {
+    margin-top: 10px;
+}
+
+/* Add this style for _Layout.cshtml */
+body {
+    padding-top: 56px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.navbar-toggler {
+    color: #fff;
+}
+
+.nav-link {
+    color: #fff;
+}
+
+.container.body-content {
+    margin-top: 20px;
+}
+
+footer {
+    margin-top: 20px;
+    text-align: center;
+}

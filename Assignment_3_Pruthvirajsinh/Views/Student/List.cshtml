@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Assignment_3_Pruthvirajsinh.Models.Student>
+@{
+    ViewBag.Title = "List";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    #containerlist {
+        max-width: 300px;
+        margin: auto;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 10px;
+        margin-top: 290px;
+        max-height: 1000px; /* Adjusted max-height */
+        overflow-y: auto;
+    }
+
+    h2 {
+        text-align: center;
+        color: #4CAF50;
+        margin-bottom: 10px;
+    }
+
+    form {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    input[type="text"], input[type="submit"] {
+        padding: 8px;
+        margin: 5px;
+    }
+
+    .listitem {
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        margin: 5px 0;
+        padding: 8px;
+    }
+
+        .listitem a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+            .listitem a:hover {
+                text-decoration: underline;
+            }
+</style>
+
+<div id="containerlist">
+    <h2>List of Students</h2>
+    <form action="/Student/List" method="GET">
+        <input type="text" name="SearchKey" autocomplete="off" />
+        <input type="submit" value="Search" />
+    </form>
+    @foreach (var student in Model)
+    {
+        <div class="listitem row">
+            <div class="col-md-12">
+                <a href="/Student/Show/@student.studentid">
+                    @student.studentfname @student.studentlname
+                </a>
+            </div>
+        </div>
+    }
+</div>

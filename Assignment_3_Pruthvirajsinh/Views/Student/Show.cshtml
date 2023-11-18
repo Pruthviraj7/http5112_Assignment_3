@@ -1,0 +1,52 @@
+﻿@model Assignment_3_Pruthvirajsinh.Models.Student
+@{
+    ViewBag.Title = "Show";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    #containershow {
+        max-width: 400px;
+        margin: auto;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    h2 {
+        color: #4CAF50;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 10px;
+    }
+
+    .navlink {
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px;
+        background-color: #007BFF;
+        color: #fff;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+</style>
+
+<div id="containershow">
+    <h2>@Model.studentfname @Model.studentlname</h2>
+    <p>Student Number: @Model.studentnumber</p>
+    <p>Enrollment Date: @Model.enroldate</p>
+    <a class="navlink" href="/Student/List">Back To Students</a>
+</div>

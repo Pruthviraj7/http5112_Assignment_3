@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Assignment_3_Pruthvirajsinh.Models.Teacher>
+@{
+    ViewBag.Title = "List";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    #containerlist {
+        max-width: 600px;
+        margin: auto;
+        padding: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    h2 {
+        color: #4CAF50;
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    form {
+        margin-bottom: 10px;
+    }
+
+    input[type="text"], input[type="submit"] {
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #4CAF50;
+        border-radius: 3px;
+    }
+
+    input[type="submit"] {
+        background-color: #4CAF50;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .listitem {
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        margin: 5px 0;
+        padding: 10px;
+        border-radius: 3px;
+    }
+
+        .listitem a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 16px;
+        }
+</style>
+
+<div id="containerlist">
+    <h2>List of Teachers</h2>
+    <form action="/Teacher/List" method="GET">
+        <input type="text" name="SearchKey" placeholder="Search by name" autocomplete="off" />
+        <input type="submit" value="Search" />
+    </form>
+    @foreach (var teacher in Model)
+    {
+        <div class="listitem">
+            <a href="/Teacher/Show/@teacher.teacherid">@teacher.teacherfname @teacher.teacherlname</a>
+        </div>
+    }
+</div>

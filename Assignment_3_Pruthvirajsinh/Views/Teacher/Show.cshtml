@@ -1,0 +1,57 @@
+﻿@model Assignment_3_Pruthvirajsinh.Models.Teacher
+@{
+    ViewBag.Title = "Show";
+}
+
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    #containershow {
+        max-width: 400px;
+        margin: auto;
+        text-align: center;
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 20px;
+        margin-top: 20px;
+    }
+
+    h2 {
+        color: #4CAF50;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .navlink {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px;
+        background-color: #007BFF;
+        color: #fff;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .navlink:hover {
+            background-color: #0056b3; /* Darker color on hover */
+        }
+</style>
+
+<div id="containershow">
+    <h2>@Model.teacherfname @Model.teacherlname</h2>
+    <p>Employee Number: @Model.employeenumber</p>
+    <p>Salary: @Model.salary</p>
+    <a href="/Teacher/List" class="navlink">Back to List</a>
+</div>
