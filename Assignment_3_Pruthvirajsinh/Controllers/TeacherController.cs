@@ -1,6 +1,7 @@
-﻿using Assignment_3_Pruthvirajsinh.Models;
+using Assignment_3_Pruthvirajsinh.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -18,6 +19,47 @@ namespace Assignment_3_Pruthvirajsinh.Controllers
         /// Displays the index view for the Teacher controller.
         /// </summary>
         /// <returns>ActionResult: The ActionResult for the Index view.</returns>
+
+        public ActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(string TeacherFname, string TeacherLname, string Employeenumber, double Salary)
+        {
+            // Server-side validation
+            if (string.IsNullOrWhiteSpace(TeacherFname) || string.IsNullOrWhiteSpace(TeacherLname) || string.IsNullOrWhiteSpace(Employeenumber) || (Salary == null || Salary <= 0))
+            {
+                ModelState.AddModelError("", "Please provide all required information.");
+                return View("Add");
+            }
+
+            // Create a new Teacher object
+            Teacher newTeacher = new Teacher
+            {
+                teacherfname = TeacherFname,
+                teacherlname = TeacherLname,
+                employeenumber = Employeenumber,
+                salary = Salary
+            };
+
+            // Create an instance of TeacherDataController and add the new teacher
+            TeacherDataController controller = new TeacherDataController();
+            controller.AddTeacher(newTeacher);
+
+            // Redirect to the list action to show the updated list
+            return RedirectToAction("List");
+        }
+
+        // Delete a teacher
+        public ActionResult Delete(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            controller.DeleteTeacher(id);
+
+            return RedirectToAction("List");
+        }
         public ActionResult Index()
         {
             return View();
