@@ -1,76 +1,66 @@
-# Assignment 3 - School Management System
+# School Management System
 
-## Overview
+Welcome to the School Management System repository. This system provides a web-based interface to manage teachers in a school setting. Below, you'll find details about the features, controllers, models, and usage instructions.
 
-This repository contains the source code for a School Management System, which includes controllers, data controllers, and models for managing students, classes, and teachers.
+## Features
 
-## Controllers
+### Teacher Management
 
-### 1. ClassController
+#### View Teachers
 
-- **Description:** Manages actions related to classes.
-- **Actions:**
-  - `Index`: Displays the index view for the Class controller.
-  - `List`: Displays a list of classes based on the provided search key.
-  - `Show`: Displays the details of a specific class.
+- **URL:** `/Teacher/Index`
+- Displays a paginated list of all teachers.
+- Each entry includes the teacher's full name, employee number, and salary.
 
-### 2. ClassDataController
+#### View Teacher Details
 
-- **Description:** ApiController for managing class data, including listing classes and retrieving class details.
-- **Actions:**
-  - `ListClasses`: Retrieves a list of classes based on the provided search key.
-  - `FindClass`: Retrieves the details of a specific class.
+- **URL:** `/Teacher/Show/{teacherId}`
+- Shows detailed information about a specific teacher.
+- Includes first and last name, employee number, salary, and hire date.
 
-### 3. StudentController
+#### Add New Teacher
 
-- **Description:** Manages actions related to students.
-- **Actions:**
-  - `Index`: Displays the index view for the Student controller.
-  - `List`: Displays a list of students based on the provided search key.
-  - `Show`: Displays details of a specific student.
+- **URL:** `/Teacher/Add`
+- Allows administrators to add a new teacher to the system.
+- Collects information such as first name, last name, employee number, salary, and hire date.
+- Performs client-side validation for mandatory fields and positive salary.
+- Server-side validation ensures all required information is provided before adding the teacher to the system.
 
-### 4. StudentDataController
+#### Delete Teacher
 
-- **Description:** ApiController for managing student data, including listing students and retrieving student details.
-- **Actions:**
-  - `ListStudents`: Retrieves a list of students based on the provided search key.
-  - `FindStudent`: Retrieves details of a specific student.
+- **URL:** `/Teacher/Delete/{teacherId}`
+- Permanently removes a teacher from the system.
+- Requires confirmation before deletion.
 
-### 5. TeacherController
+### API Endpoints
 
-- **Description:** Manages actions related to teachers.
-- **Actions:**
-  - `Index`: Displays the index view for the Teacher controller.
-  - `List`: Displays a list of teachers based on the provided search key.
-  - `Show`: Displays details of a specific teacher.
+#### List Teachers (API)
 
-### 6. TeacherDataController
+- **URL:** `/api/TeacherData/ListTeachers/{searchKey?}`
+- Provides a JSON array of teachers based on the optional search key.
+- Used for dynamic content loading and search functionality.
 
-- **Description:** ApiController for managing teacher data, including listing teachers and retrieving teacher details.
-- **Actions:**
-  - `ListTeachers`: Retrieves a list of teachers based on the provided search key.
-  - `FindTeacher`: Retrieves details of a specific teacher.
+#### Find Teacher (API)
+
+- **URL:** `/api/TeacherData/FindTeacher/{teacherId}`
+- Retrieves detailed information about a specific teacher in JSON format.
+
+#### Add Teacher (API)
+
+- **URL:** `/api/TeacherData/AddTeacher`
+- Adds a new teacher to the system via API.
+- Requires a JSON payload with teacher details.
+- Performs server-side validation to ensure the integrity of the data.
+
+#### Delete Teacher (API)
+
+- **URL:** `/api/TeacherData/DeleteTeacher/{teacherId}`
+- Deletes a teacher from the system via API.
+- Requires teacher ID in the URL.
 
 ## Models
 
-### 1. Class Model
-
-- **Fields:**
-  - `classid`: Unique identifier for the class.
-  - `classname`: Name of the class.
-  - `classcode`: Code associated with the class.
-  - `teacherid`: ID of the teacher assigned to the class.
-
-### 2. Student Model
-
-- **Fields:**
-  - `studentid`: Unique identifier for the student.
-  - `studentfname`: First name of the student.
-  - `studentlname`: Last name of the student.
-  - `studentnumber`: Unique student number.
-  - `enroldate`: Enrollment date of the student.
-
-### 3. Teacher Model
+### Teacher Model
 
 - **Fields:**
   - `teacherid`: Unique identifier for the teacher.
@@ -78,7 +68,20 @@ This repository contains the source code for a School Management System, which i
   - `teacherlname`: Last name of the teacher.
   - `employeenumber`: Unique employee number for the teacher.
   - `salary`: Salary of the teacher.
-  - `ClassId`: ID of the associated class (nullable).
+  - `hiredate`: Date when the teacher was hired.
+
+## Validation
+
+### Client-Side Validation
+
+- Implemented using JavaScript on the Add Teacher page.
+- Validates mandatory fields and ensures the salary is a positive number.
+
+### Server-Side Validation
+
+- Implemented in the API controllers (`TeacherDataController`).
+- Ensures that all required information is provided before processing requests.
+- Guarantees the integrity of the data in the system.
 
 ## Database Context
 
@@ -94,3 +97,5 @@ This repository contains the source code for a School Management System, which i
 1. Clone the repository.
 2. Configure the database connection in `SchoolDbContext`.
 3. Run the application.
+
+
