@@ -1,9 +1,11 @@
-﻿@model Assignment_3_Pruthvirajsinh.Models.Teacher
+@model Assignment_3_Pruthvirajsinh.Models.Teacher
 @{
     ViewBag.Title = "Show";
 }
 
 <style>
+    /* Styles for the teacher show page */
+
     body {
         font-family: 'Arial', sans-serif;
         background-color: #f0f0f0;
@@ -15,11 +17,10 @@
         max-width: 400px;
         margin: auto;
         text-align: center;
-        background-color: #fff;
+        background-color: pink;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         padding: 20px;
-        margin-top: 20px;
     }
 
     h2 {
@@ -53,5 +54,8 @@
     <h2>@Model.teacherfname @Model.teacherlname</h2>
     <p>Employee Number: @Model.employeenumber</p>
     <p>Salary: @Model.salary</p>
+    <!-- Display Hire Date -->
+    <p>Hire Date: @Model.HireDate.ToShortDateString()</p>
     <a href="/Teacher/List" class="navlink">Back to List</a>
+    <a id="deleteTrigger" href="/Teacher/Delete/@Model.teacherid">Delete Teacher</a>
 </div>
