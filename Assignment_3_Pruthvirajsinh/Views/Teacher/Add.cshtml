@@ -1,0 +1,165 @@
+@{
+    ViewBag.Title = "Add";
+}
+<style>
+    /* Styles for the teacher add page */
+
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+    }
+
+    #containershow {
+        max-width: 400px;
+        margin: auto;
+        text-align: center;
+        background-color: pink;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        padding: 20px;
+    }
+
+    h2 {
+        color: #4CAF50;
+        margin-bottom: 10px;
+    }
+
+    p {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .navlink {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px;
+        background-color: #007BFF;
+        color: #fff;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        .navlink:hover {
+            background-color: #0056b3; /* Darker color on hover */
+        }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .inputrow {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    label {
+        margin-bottom: 5px;
+    }
+
+    input[type="text"], input[type="date"] {
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #4CAF50;
+        border-radius: 3px;
+        transition: border-color 0.3s ease;
+    }
+
+        input[type="text"]:focus, input[type="date"]:focus {
+            border-color: #007BFF;
+        }
+
+    input[type="submit"] {
+        padding: 10px;
+        margin: 10px;
+        background-color: #4CAF50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+    .error-message {
+        color: red;
+        margin-top: 10px;
+    }
+</style>
+@{
+    // Get validation errors from ModelState
+    var errors = ViewData.ModelState.Values.SelectMany(v => v.Errors);
+}
+
+@if (errors.Any())
+{
+    <!-- Display validation errors -->
+    <div class="alert alert-danger">
+        <ul>
+            @foreach (var error in errors)
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}
+
+<form method="POST" action="/Teacher/Create" onsubmit="return validateForm();">
+    <!-- Form for adding a new teacher -->
+    <div class="inputrow">
+        <label for="TeacherFname">First Name:</label>
+        <input type="text" id="TeacherFname" name="TeacherFname" />
+    </div>
+    <div class="inputrow">
+        <label for="TeacherLname">Last Name:</label>
+        <input type="text" id="TeacherLname" name="TeacherLname" />
+    </div>
+    <div class="inputrow">
+        <label for="Employeenumber">Employee Number:</label>
+        <input type="text" id="Employeenumber" name="Employeenumber" />
+    </div>
+    <div class="inputrow">
+        <label for="Salary">Salary:</label>
+        <input type="text" id="Salary" name="Salary" />
+    </div>
+    <!-- New input for HireDate -->
+    <div class="inputrow">
+        <label for="HireDate">Hire Date:</label>
+        <input type="date" id="HireDate" name="HireDate" />
+    </div>
+    <div class="inputrow">
+        <input type="submit" value="Create Teacher" />
+    </div>
+</form>
+
+<script>
+    // Client-side validation function
+    function validateForm() {
+        var fname = document.getElementById("TeacherFname").value;
+        var lname = document.getElementById("TeacherLname").value;
+        var employeeNumber = document.getElementById("Employeenumber").value;
+        var salary = document.getElementById("Salary").value;
+        var hireDate = document.getElementById("HireDate").value;
+
+        if (!fname || !lname || !employeeNumber || !salary || !hireDate) {
+            alert("Please provide all required information.");
+            return false;
+        }
+
+        if (isNaN(salary) || parseFloat(salary) <= 0) {
+            alert("Please enter a valid positive number for Salary.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
