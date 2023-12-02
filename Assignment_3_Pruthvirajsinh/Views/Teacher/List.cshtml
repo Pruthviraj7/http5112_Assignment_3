@@ -1,9 +1,11 @@
-﻿@model IEnumerable<Assignment_3_Pruthvirajsinh.Models.Teacher>
+@model IEnumerable<Assignment_3_Pruthvirajsinh.Models.Teacher>
 @{
     ViewBag.Title = "List";
 }
 
 <style>
+    /* Styles for the teacher list page */
+
     body {
         font-family: 'Arial', sans-serif;
         background-color: #f0f0f0;
@@ -33,7 +35,8 @@
         margin-bottom: 10px;
     }
 
-    input[type="text"], input[type="submit"] {
+    input[type="text"],
+    input[type="submit"] {
         padding: 8px;
         margin: 5px;
         border: 1px solid #4CAF50;
@@ -60,10 +63,25 @@
             font-weight: bold;
             font-size: 16px;
         }
+
+    #addTeacherBtn {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 8px;
+        margin: 5px;
+        border: 1px solid #4CAF50;
+        border-radius: 3px;
+        text-decoration: none;
+        display: inline-block;
+        cursor: pointer;
+    }
 </style>
 
 <div id="containerlist">
     <h2>List of Teachers</h2>
+
+    <a href="/Teacher/Add" id="addTeacherBtn">Add Teacher</a>
+
     <form action="/Teacher/List" method="GET">
         <input type="text" name="SearchKey" placeholder="Search by name" autocomplete="off" />
         <input type="submit" value="Search" />
@@ -72,6 +90,8 @@
     {
         <div class="listitem">
             <a href="/Teacher/Show/@teacher.teacherid">@teacher.teacherfname @teacher.teacherlname</a>
+            <!-- Display Hire Date -->
+           
         </div>
     }
 </div>
