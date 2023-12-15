@@ -26,6 +26,13 @@ Welcome to the School Management System repository. This system provides a web-b
 - Performs client-side validation for mandatory fields and positive salary.
 - Server-side validation ensures all required information is provided before adding the teacher to the system.
 
+#### Update Teacher
+
+- **URL:** `/Teacher/Update/{teacherId}`
+- Enables administrators to update information for an existing teacher.
+- Collects updated information such as first name, last name, employee number, salary, and hire date.
+- Performs client-side and server-side validation to ensure data integrity.
+
 #### Delete Teacher
 
 - **URL:** `/Teacher/Delete/{teacherId}`
@@ -52,6 +59,13 @@ Welcome to the School Management System repository. This system provides a web-b
 - Requires a JSON payload with teacher details.
 - Performs server-side validation to ensure the integrity of the data.
 
+#### Update Teacher (API)
+
+- **URL:** `/api/TeacherData/UpdateTeacher/{teacherId}`
+- Updates information for an existing teacher via API.
+- Requires a JSON payload with updated teacher details.
+- Performs server-side validation to ensure data integrity.
+
 #### Delete Teacher (API)
 
 - **URL:** `/api/TeacherData/DeleteTeacher/{teacherId}`
@@ -74,7 +88,7 @@ Welcome to the School Management System repository. This system provides a web-b
 
 ### Client-Side Validation
 
-- Implemented using JavaScript on the Add Teacher page.
+- Implemented using JavaScript on the Add Teacher and Update Teacher pages.
 - Validates mandatory fields and ensures the salary is a positive number.
 
 ### Server-Side Validation
@@ -97,5 +111,3 @@ Welcome to the School Management System repository. This system provides a web-b
 1. Clone the repository.
 2. Configure the database connection in `SchoolDbContext`.
 3. Run the application.
-
-
