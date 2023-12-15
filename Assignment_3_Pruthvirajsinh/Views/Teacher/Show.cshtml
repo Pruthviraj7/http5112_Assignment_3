@@ -48,6 +48,37 @@
         .navlink:hover {
             background-color: #0056b3; /* Darker color on hover */
         }
+
+    .updateTeacherBtn {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px;
+        background-color: #28a745; /* Green color */
+        color: #fff;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        margin-right: 1px;
+    }
+
+        .updateTeacherBtn:hover {
+            background-color: #218838; /* Darker green color on hover */
+        }
+
+    #deleteTrigger {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        padding: 10px;
+        background-color: #dc3545; /* Red color */
+        color: #fff;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+        #deleteTrigger:hover {
+            background-color: #c82333; /* Darker red color on hover */
+        }
 </style>
 
 <div id="containershow">
@@ -56,6 +87,8 @@
     <p>Salary: @Model.salary</p>
     <!-- Display Hire Date -->
     <p>Hire Date: @Model.HireDate.ToShortDateString()</p>
+
     <a href="/Teacher/List" class="navlink">Back to List</a>
+    <a href="/Teacher/Update/@Model.teacherid" class="updateTeacherBtn">Update Teacher</a>
     <a id="deleteTrigger" href="/Teacher/Delete/@Model.teacherid">Delete Teacher</a>
 </div>
