@@ -19,12 +19,28 @@ namespace Assignment_3_Pruthvirajsinh.Controllers
         /// Displays the index view for the Teacher controller.
         /// </summary>
         /// <returns>ActionResult: The ActionResult for the Index view.</returns>
+        public ActionResult Index()
+        {
+            return View();
+        }
 
+        /// <summary>
+        /// Displays the view for adding a new teacher.
+        /// </summary>
+        /// <returns>ActionResult: The ActionResult for the Add view.</returns>
         public ActionResult Add()
         {
             return View();
         }
 
+        /// <summary>
+        /// Handles the POST request for creating a new teacher.
+        /// </summary>
+        /// <param name="TeacherFname">The first name of the new teacher.</param>
+        /// <param name="TeacherLname">The last name of the new teacher.</param>
+        /// <param name="Employeenumber">The employee number of the new teacher.</param>
+        /// <param name="Salary">The salary of the new teacher.</param>
+        /// <returns>ActionResult: Redirects to the List action to show the updated list.</returns>
         [HttpPost]
         public ActionResult Create(string TeacherFname, string TeacherLname, string Employeenumber, double Salary)
         {
@@ -52,20 +68,6 @@ namespace Assignment_3_Pruthvirajsinh.Controllers
             return RedirectToAction("List");
         }
 
-        // Delete a teacher
-        public ActionResult Delete(int id)
-        {
-            TeacherDataController controller = new TeacherDataController();
-            controller.DeleteTeacher(id);
-
-            return RedirectToAction("List");
-        }
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        // GET: /Author/List
         /// <summary>
         /// Displays a list of teachers based on the provided search key.
         /// </summary>
@@ -78,7 +80,6 @@ namespace Assignment_3_Pruthvirajsinh.Controllers
             return View(Teachers);
         }
 
-        // GET: /Author/Show/{id}
         /// <summary>
         /// Displays the details of a specific teacher.
         /// </summary>
@@ -90,6 +91,71 @@ namespace Assignment_3_Pruthvirajsinh.Controllers
             Teacher NewTeacher = controller.FindTeacher(id);
 
             return View(NewTeacher);
+        }
+
+        /// <summary>
+        /// Displays the view for updating an existing teacher.
+        /// </summary>
+        /// <param name="id">The ID of the teacher to update.</param>
+        /// <returns>ActionResult: The ActionResult for the Update view with the details of the selected teacher.</returns>
+        public ActionResult Update(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher SelectedTeacher = controller.FindTeacher(id);
+
+            return View(SelectedTeacher);
+        }
+
+        /// <summary>
+        /// Handles the POST request for updating an existing teacher.
+        /// </summary>
+        /// <param name="id">Id of the Teacher to update</param>
+        /// <param name="TeacherFname">The updated first name of the teacher</param>
+        /// <param name="TeacherLname">The updated last name of the teacher</param>
+        /// <param name="EmployeeNumber">The updated employee number of the teacher.</param>
+        /// <param name="Salary">The updated salary of the teacher.</param>
+        /// <returns>ActionResult: Redirects to the "Teacher Show" page of the updated teacher.</returns>
+        [HttpPost]
+        public ActionResult Update(int id, string TeacherFname, string TeacherLname, string EmployeeNumber, double Salary)
+        {
+            Teacher TeacherInfo = new Teacher
+            {
+                teacherfname = TeacherFname,
+                teacherlname = TeacherLname,
+                employeenumber = EmployeeNumber,
+                salary = Salary
+            };
+
+            TeacherDataController controller = new TeacherDataController();
+            controller.UpdateTeacher(id, TeacherInfo);
+
+            return RedirectToAction("Show/" + id);
+        }
+
+        /// <summary>
+        /// Deletes a teacher with the specified ID.
+        /// </summary>
+        /// <param name="id">The ID of the teacher to delete.</param>
+        /// <returns>ActionResult: Redirects to the List action to show the updated list.</returns>
+        public ActionResult Delete(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            controller.DeleteTeacher(id);
+
+            return RedirectToAction("List");
+        }
+
+        /// <summary>
+        /// Displays the Ajax_Update view for updating an existing teacher using AJAX.
+        /// </summary>
+        /// <param name="id">The ID of the teacher to update.</param>
+        /// <returns>ActionResult: The ActionResult for the Ajax_Update view with the details of the selected teacher.</returns>
+        public ActionResult Ajax_Update(int id)
+        {
+            TeacherDataController controller = new TeacherDataController();
+            Teacher SelectedTeacher = controller.FindTeacher(id);
+
+            return View(SelectedTeacher);
         }
     }
 }
