@@ -10,6 +10,9 @@ using System.Web.Http.Cors;
 
 namespace Assignment_3_Pruthvirajsinh.Controllers
 {
+    /// <summary>
+    /// Controller for managing teacher data in the database.
+    /// </summary>
     public class TeacherDataController : ApiController
     {
         private SchoolDbContext School = new SchoolDbContext();
@@ -28,7 +31,7 @@ namespace Assignment_3_Pruthvirajsinh.Controllers
                 string.IsNullOrWhiteSpace(newTeacher.teacherlname) ||
                 string.IsNullOrWhiteSpace(newTeacher.employeenumber) ||
                 !IsSalaryValid(newTeacher.salary) ||
-        newTeacher.HireDate == null)
+                newTeacher.HireDate == null)
             {
                 // Return a BadRequest response if validation fails.
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Please provide all required information, and ensure that the salary is a valid positive number.");
@@ -205,6 +208,59 @@ namespace Assignment_3_Pruthvirajsinh.Controllers
             Conn.Close();
 
             return NewTeacher;
+        }
+
+        /// <summary>
+        /// Update a teacher in the database.
+        /// </summary>
+        /// <param name="id">The ID of the teacher to update.</param>
+        /// <param name="updatedTeacher">The Teacher object representing the updated teacher information.</param>
+        /// <returns>HttpResponseMessage indicating the result of the operation.</returns>
+        [HttpPost]
+        public HttpResponseMessage UpdateTeacher(int id, [FromBody] Teacher updatedTeacher)
+        {
+            try
+            {
+                if (string.IsNullOrWhiteSpace(updatedTeacher.teacherfname) ||
+                    string.IsNullOrWhiteSpace(updatedTeacher.teacherlname) ||
+                    string.IsNullOrWhiteSpace(updatedTeacher.employeenumber) ||
+                    !IsSalaryValid(updatedTeacher.salary) ||
+                    updatedTeacher.HireDate == null)
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Please provide all required information, and ensure that the salary is a valid positive number.");
+                }
+
+                MySqlConnection Conn = School.AccessDatabase();
+                Conn.Open();
+
+                MySqlCommand cmd = Conn.CreateCommand();
+
+                cmd.CommandText = "UPDATE teachers SET teacherfname=@TeacherFname, teacherlname=@TeacherLname, employeenumber=@EmployeeNumber, salary=@Salary, HireDate=@HireDate WHERE teacherid=@Id";
+                cmd.Parameters.AddWithValue("@TeacherFname", updatedTeacher.teacherfname);
+                cmd.Parameters.AddWithValue("@TeacherLname", updatedTeacher.teacherlname);
+                cmd.Parameters.AddWithValue("@EmployeeNumber", updatedTeacher.employeenumber);
+                cmd.Parameters.AddWithValue("@Salary", updatedTeacher.salary);
+                cmd.Parameters.AddWithValue("@HireDate", updatedTeacher.HireDate);
+                cmd.Parameters.AddWithValue("@Id", id);
+                cmd.Prepare();
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+
+                Conn.Close();
+
+                if (rowsAffected > 0)
+                {
+                    return new HttpResponseMessage(HttpStatusCode.OK);
+                }
+                else
+                {
+                    return new HttpResponseMessage(HttpStatusCode.NotFound);
+                }
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, "An error occurred while processing the request.");
+            }
         }
     }
 }
